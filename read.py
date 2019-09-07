@@ -6,14 +6,26 @@ with open('reviews.txt', 'r') as f:
 		data.append(line)
 		if count % 100000 == 0:
 			print(len(data))
-print('總共', len(data), '筆資料')
-sum_data = 0
+wc = {} #word_count
 for d in data:
-	sum_data = sum_data + len(d)
-print('每筆留言平均長度為', sum_data / len(data))
-new = []
-for d in data:
-	if len(d) < 100:
-		new.append(d)
-print('共有', len(new), '筆長度大於100')
-print(new[0])
+	words = d.split()
+	for word in words:
+		if word in wc:
+			wc[word] += 1
+		else:
+			wc[word] = 1
+# for word in wc:
+# 	if wc[word] >= 1000000:
+		# print(word, wc[word])
+# print(len(wc))
+# print(wc['Allen'])
+
+while True:
+	word = input('請輸入想查詢單字')
+	if word == 'q':
+		break
+	if word in wc:
+		print(word, '出現了', wc[word])
+	else:
+		print('檔案無此單字')
+print('感謝您的使用')
